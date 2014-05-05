@@ -1,0 +1,17 @@
+{
+  "name": "noise-voice",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "node-static": "~0.7.3",
+    "socket.io": "~0.9.16",
+    "express": "~4.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}
