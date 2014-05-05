@@ -6,7 +6,8 @@
   "dependencies": {
     "node-static": "~0.7.3",
     "socket.io": "~0.9.16",
-    "express": "~4.1.1"
+    "express": "~4.1.1",
+    "ejs": "~1.0.0"
   },
   "devDependencies": {},
   "scripts": {
