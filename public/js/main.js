@@ -1,7 +1,5 @@
 var isInitiator;
 
-room = prompt("Enter room name:");
-
 var socket = io.connect();
 
 if (room !== "") {

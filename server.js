@@ -1,12 +1,38 @@
 var express = require('express');
 var app = express();
+var router = express.Router();
+var path = require('path');
 var server = app.listen(process.env.PORT || 5000);
 var io = require('socket.io').listen(server);
+var index = require('./routes/index');
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+//router
+/*
+app.get('/:roomName', function(req, res){
+  app.locals.roomName = req.params.roomName;
+});
+
+
+router.use(function(req, res, next) {
+	app.locals.roomName = req.params.roomName;
+	//res.send('bar');
+	next();
+});
+router.use(express.static(__dirname + '/public'));
+
+app.use('/bar', router);
+*/
+
 app.use(express.static(__dirname + '/public'));
 
+//routes
+app.get('/', index);
+app.get('/:roomName', index);
 
 io.sockets.on('connection', function (socket){
-
   // convenience function to log server messages on the client
 	function log(){
 		var array = [">>> Message from server: "];
