@@ -12,9 +12,17 @@
 
 <body>
 
+<section id='container'>
+	<div id='videos'>
+		<video id='localVideo' autoplay muted></video>
+		<video id='remoteVideo' autoplay></video>
+	</div>
+</section>
+
+
 <script src='/socket.io/socket.io.js'></script>
 <script src='js/lib/adapter.js'></script>
-<script type='text/javascript'> var room ="<%= roomName %>";</script>
+<script type='text/javascript'> var room ='<%= roomName %>' !='undefined'?<%= roomName %>:'';</script>
 <script src="js/main.js"></script>
 
 </body>

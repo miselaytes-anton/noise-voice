@@ -1,13 +1,5 @@
 git clone git@heroku.com:noise-voice.git -o heroku
 
-https://twitter.com/search?f=realtime&q=%40AWEPA%20since%3A2014-04-01%20until%3A2014-04-30%20include%3Aretweets&src=typd
 
-jQuery('html, body').animate({scrollTop:jQuery(document).height()}, 'fast');
 
-var array = [];
-jQuery('.js-stream-item').each(function() {
-	array.push(this);
-});
-array.length;
 
-jQuery(window).scrollTop();
