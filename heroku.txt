@@ -1,5 +1,0 @@
-git clone git@heroku.com:noise-voice.git -o heroku
-
-
-
-

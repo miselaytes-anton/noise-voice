@@ -7,7 +7,9 @@
     "node-static": "~0.7.3",
     "socket.io": "~0.9.16",
     "express": "~4.1.1",
-    "ejs": "~1.0.0"
+    "ejs": "~1.0.0",
+    "body-parser": "~1.0.2",
+    "webrtcsupport": "~0.7.3"
   },
   "devDependencies": {},
   "scripts": {

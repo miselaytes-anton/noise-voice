@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="keywords" content="WebRTC, HTML5, JavaScript" />
+<meta name="description" content="WebRTC Reference App" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+<title>WebRTC client</title>
+
+</head>
+
+<body>
+
+<section id='container'>
+	<div id='videos'>
+		<video id='localVideo' autoplay muted></video>
+		<video id='remoteVideo' autoplay></video>
+	</div>
+</section>
+
+
+<script src='/socket.io/socket.io.js'></script>
+<script src='js/lib/adapter.js'></script>
+<script type='text/javascript'> var room ='<%= roomName %>' !='undefined'?'<%= roomName %>':'';</script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

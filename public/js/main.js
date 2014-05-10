@@ -18,8 +18,6 @@ var sdpConstraints = {'mandatory': {
   'OfferToReceiveVideo':true }};
 
 /////////////////////////////////////////////
-//defaulting room to 'foo' if  it's not defined
-if (room === '') { room = 'foo'; } 
 /*
 SOCKETS
 */

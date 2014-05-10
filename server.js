@@ -1,18 +1,21 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 var app = express();
-var router = express.Router();
 var path = require('path');
 var server = app.listen(process.env.PORT || 5000);
 var io = require('socket.io').listen(server);
-var index = require('./routes/index');
+var templates = require('./routes/templates');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser());
 
 //routes
-app.get('/', index);
-app.get('/:roomName', index);
+app.get('/', templates.index);
+app.post('/', templates.setRoomName);
+app.get('/:roomName', templates.room);
 
 io.sockets.on('connection', function (socket){
 	function log(){

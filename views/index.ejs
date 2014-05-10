@@ -11,19 +11,10 @@
 </head>
 
 <body>
-
-<section id='container'>
-	<div id='videos'>
-		<video id='localVideo' autoplay muted></video>
-		<video id='remoteVideo' autoplay></video>
-	</div>
-</section>
-
-
-<script src='/socket.io/socket.io.js'></script>
-<script src='js/lib/adapter.js'></script>
-<script type='text/javascript'> var room ='<%= roomName %>' !='undefined'?<%= roomName %>:'';</script>
-<script src="js/main.js"></script>
-
+<form action='/' method='post'>
+<input type="text" placeholder ="Enter a room name" class="roomName" name="roomName"></input>
+<button>Create/Join</button>
+</form>
+<script></script>
 </body>
 </html>
