@@ -2,7 +2,7 @@ exports.index = function(req, res){
     res.render('index');
 };
 exports.room = function(req, res){
-    res.render('room', {roomName: req.params.roomName });
+    res.render('room', {roomName: req.params.roomName,  domain: req.get('host')});
 };
 
 exports.setRoomName = function(req, res, next){

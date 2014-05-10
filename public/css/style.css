@@ -1,3 +1,22 @@
-video {
-  -webkit-filter: hue-rotate(150deg) saturate(10);
+body:after {
+  content: "";
+  background: url('../img/noise.gif');
+  opacity: 0.08;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
+#localVideo{
+	width: 25%; 
+	min-width: 160px;
+}
+#remoteVideo{
+	width: 100%;
+	max-height:100%;
+}
+
+.videos{position:relative;}
+
