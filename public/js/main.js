@@ -1,4 +1,166 @@
-var isChannelReady;
+function initAudioNodes(stream) {
+	tuna = new Tuna(context);
+	$(".mic-status").addClass("label-success").text("on");
+	var audioNodes = new AudioNodes ( stream, [ "input", "delay", "tunachorus", "gain", "compressor", "destination"] );
+};
+
+function AudioNodes(stream, nodesNames) {
+	console.log("tuna nodes");
+	this.nodes = nodesNames;
+	this.stream = stream;
+	this.createNodes(nodesNames);
+}
+
+AudioNodes.prototype.createNodes = function () {
+	for (i=0;i <this.nodes.length; i++)	{
+		var nodeName = this.nodes[ i ];
+		this.nodes[ i ] = {"name": nodeName};
+		switch( nodeName ) {
+			case "input":
+				var node = context.createMediaStreamSource( this.stream );	
+				break;
+			case "delay":
+				//max delay time is 5 seconds
+				var node = context.createDelay(5);
+				node.delayTime.value = 0;
+				break;
+			case "gain":
+				var node = context.createGain();
+				//default gain value
+				node.gain.value = 0.5;
+				break;
+			case "tunachorus":
+				var node = new tuna.Chorus({
+					 rate: 1.5,         //0.01 to 8+
+					 feedback: 0.2,     //0 to 1+
+					 delay: 0.0045,     //0 to 1
+					 bypass: 0          //the value 1 starts the effect as bypassed, 0 or 1
+				 });
+				break;
+			case "compressor":
+				var node = context.createDynamicsCompressor();
+				break;
+			case "destination":
+				var node = context.destination;
+				break;
+			default:
+				console.error(this.nodes[ i ]+" is not an allowed node type");
+				return;
+		}
+		if (typeof node =='object') { 
+			//set the connection status of each node to connected
+			this.nodes[ i ].node =  node; 
+			this.nodes[ i ].node.isConnected=true;
+			
+		}
+	
+		//connect the nodes
+		if ( i>0 ) {
+			this.nodes[ i-1 ].node.connect( this.nodes[ i ].node.input || this.nodes[ i ].node);
+		}
+	}
+	this.attachEvents(this.nodes);
+};
+
+AudioNodes.prototype.attachEvents = function(nodes) {
+	var that=this;
+	for ( i=0; i<nodes.length; i++  ) {
+		switch ( nodes[ i ].name ){
+			case "delay":
+				var d = nodes[ i ];
+				$(".delay-switch").change(d, function( ) {
+					//console.log("switch "+n.name)
+					that.nodeSwitch( d );
+				});
+				$(".delay-value").change(d, function() {
+					that.nodeChangeValue(d , this);
+				});
+				break;
+			case "gain":
+				var g = nodes[ i ];
+				$(".gain-switch").change(g, function() {
+					that.nodeSwitch( g );
+				});
+				$(".gain-value").change( g, function() {
+					that.nodeChangeValue(g, this);
+				});
+				break;
+			case "tunachorus":
+				var tc = nodes[ i ];
+				$(".tunachorus-switch").change(tc, function() {
+					that.nodeSwitch( tc );
+				});
+				$(".tunachorus-rate, .tunachorus-feedback, .tunachorus-delay").change(tc, function() {
+					that.nodeChangeValue(tc, this);
+				});
+				break;
+		}//switch
+	}//for
+	
+	
+};
+
+AudioNodes.prototype.nodeSwitch = function(nodeToSwitch) {
+	//get the previous and next connected nodes in audio graph
+	//look for a node which is connected and brake
+	var nodeIndex = this.nodes.indexOf(nodeToSwitch);
+	for (i=1; i < this.nodes.length; i++) {
+		if (this.nodes[ nodeIndex - i ].node.isConnected) { 
+			 var previousNode   = this.nodes[ nodeIndex - i ].node || null; 
+			break;
+		}
+	}
+	for (i=1; i < this.nodes.length; i++) {
+		if (this.nodes[ nodeIndex +i ].node.isConnected) { 
+			var nextNode   = this.nodes[ nodeIndex + i ].node || null; 
+			break;
+		}
+	}
+	//disconnect the node if its connected, otherwise - connect 
+	if ( nodeToSwitch.node.isConnected ) {
+		previousNode.disconnect(0);
+		nodeToSwitch.node.disconnect(0);
+		previousNode.connect(nextNode.input || nextNode);
+	} else {
+		previousNode.disconnect(0);
+		previousNode.connect(nodeToSwitch.node.input || nodeToSwitch.node);
+		nodeToSwitch.node.connect(nextNode.input || nextNode);
+	}
+	//toogle node's connection state
+	nodeToSwitch.node.isConnected = !nodeToSwitch.node.isConnected;
+};
+
+
+AudioNodes.prototype.nodeChangeValue = function (nodeToAdjust, element) {
+	var val = parseFloat(element.value);
+	var node = nodeToAdjust.node;
+	if (node instanceof GainNode) {
+		node.gain.value = val;
+	}
+	if (node instanceof DelayNode) {
+		node.delayTime.value = val;
+	}
+	if (node instanceof Tuna.prototype.Chorus) {
+		switch (element.name){
+			case "rate":
+				node.rate = val;
+				break;
+			case "feedback":
+				node.feedback = val;
+				break;
+			case "delay":
+				node.delay = val;
+				break;
+			case "bypass":
+				node.bypass = val;
+				break;
+			default:
+				console.error($(element).attr("name")+" is not an allowed setting name");
+		}
+	}
+}
+
+;var isChannelReady;
 var isInitiator = false;
 var isStarted = false;
 var localStream;
@@ -24,7 +186,7 @@ SOCKETS
 //emitting a on connected event
 var socket = io.connect();
 
-if (room !== '') {
+if (typeof room != 'undefined') {
   console.log('Create or join room', room);
   //server reacts to this event by emitting either "create" or "join" events depending on the situation
   socket.emit('create or join', room);
@@ -95,13 +257,15 @@ var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
 
 function handleUserMedia(stream) {
-  console.log('Adding local stream.');
-  localVideo.src = window.URL.createObjectURL(stream);
-  localStream = stream;
-  sendMessage('got user media');
-  if (isInitiator) {
-    maybeStart();
-  }
+	//modify audio with web audio/tuna.js nodes
+	initAudioNodes(stream);
+	console.log('Adding local stream.');
+	localVideo.src = window.URL.createObjectURL(stream);
+	localStream = stream;
+	sendMessage('got user media');
+	if (isInitiator) {
+	maybeStart();
+	}
 }
 
 function handleUserMediaError(error){
