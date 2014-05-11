@@ -1,0 +1,32 @@
+@import "bootstrap/bootstrap.less";
+//colors
+@grey: #606060;
+@grey-darker: #313234;
+@black: #1F1F1F;
+@mint: #2AC8AD;
+@beige: #F8F8F8;
+@yellow: #FBDC01;
+
+body:after {
+  content: "";
+  background-color: @beige;
+ // background: url('../img/noise.gif');
+  //opacity: 0.08;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+#localVideo{
+	width: 25%; 
+	min-width: 160px;
+}
+#remoteVideo{
+	width: 100%;
+	max-height:100%;
+}
+
+.videos{position:relative;}
+
