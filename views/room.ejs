@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="keywords" content="WebRTC, HTML5, JavaScript" />
-	<meta name="description" content="WebRTC Reference App" />
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
-	<title>Noise Voice</title>
-	<link rel="stylesheet" href="css/style.css">
-	
-</head>
-
-<body>
-
+<%- include header.ejs %>
 <section class='container-fluid'>
 	<nav class="row">
 		<ul class="nav pull-left">
@@ -34,13 +22,5 @@
 	</div>
 
 </section>
-
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src='/socket.io/socket.io.js'></script>
-<script src='js/lib/adapter.js'></script>
 <script type='text/javascript'> var room ='<%= roomName %>' !='undefined'?'<%= roomName %>':'';</script>
-<script src="js/main.js"></script>
-
-
-</body>
-</html>
+<%- include footer.ejs %>
