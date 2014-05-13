@@ -31,16 +31,14 @@ module.exports = function(grunt) {
 		}
 	},
 	watch :{
-		development: {
 			less:{
 				files: ['public/_/less/*.less'],
 				tasks: ['less']
 			},
 			js: {
 				files: [ 'public/_/js/*.js' ],
-				tasks: ['uglify']
+				tasks: ['concat']
 			}
-		}
 	}
   });
 

@@ -1,17 +1,28 @@
 function initAudioNodes(stream) {
+	//if tuna nodes will be used, then tuna object needs to be created
 	tuna = new Tuna(context);
 	$(".mic-status").addClass("label-success").text("on");
-	var audioNodes = new AudioNodes ( stream, [ "input", "delay", "tunachorus", "gain", "compressor", "destination"] );
+	var audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "streamDestination"] );
 };
 
 function AudioNodes(stream, nodesNames) {
-	console.log("tuna nodes");
-	this.nodes = nodesNames;
+	//if no extra nodes were provided default to an empty array
+	this.nodes = nodesNames || [ ];
+	//add the default nodes to the array of nodes' names
+	this.nodes.unshift("input");
+	this.nodes.push("gain", "compressor", "destination");
+	
+	//if streamDestination is part of the array, move it to the end of the array
+	var index = this.nodes.indexOf("streamDestination");
+	if (index > -1) {
+		this.nodes.splice(index, 1);
+		this.nodes.push("streamDestination");
+	}
 	this.stream = stream;
-	this.createNodes(nodesNames);
+	this.createNodes();
 }
 
-AudioNodes.prototype.createNodes = function () {
+AudioNodes.prototype.createNodes = function () {	
 	for (i=0;i <this.nodes.length; i++)	{
 		var nodeName = this.nodes[ i ];
 		this.nodes[ i ] = {"name": nodeName};
@@ -31,8 +42,8 @@ AudioNodes.prototype.createNodes = function () {
 				break;
 			case "tunachorus":
 				var node = new tuna.Chorus({
-					 rate: 1.5,         //0.01 to 8+
-					 feedback: 0.2,     //0 to 1+
+					 rate: 8,         //0.01 to 8+
+					 feedback: 0.85,     //0 to 1+
 					 delay: 0.0045,     //0 to 1
 					 bypass: 0          //the value 1 starts the effect as bypassed, 0 or 1
 				 });
@@ -40,6 +51,9 @@ AudioNodes.prototype.createNodes = function () {
 			case "compressor":
 				var node = context.createDynamicsCompressor();
 				break;
+			case "streamDestination":
+				var node = context.createMediaStreamDestination();
+				break;	
 			case "destination":
 				var node = context.destination;
 				break;
@@ -56,7 +70,12 @@ AudioNodes.prototype.createNodes = function () {
 	
 		//connect the nodes
 		if ( i>0 ) {
-			this.nodes[ i-1 ].node.connect( this.nodes[ i ].node.input || this.nodes[ i ].node);
+			//connect streamDestination to the node before destination (compressor)
+			if ( this.nodes[ i ].name =="streamDestination" )	{
+				this.nodes[ i-2 ].node.connect( this.nodes[ i ].node);
+			} else {
+				this.nodes[ i-1 ].node.connect( this.nodes[ i ].node.input || this.nodes[ i ].node);
+			}
 		}
 	}
 	this.attachEvents(this.nodes);
@@ -78,9 +97,6 @@ AudioNodes.prototype.attachEvents = function(nodes) {
 				break;
 			case "gain":
 				var g = nodes[ i ];
-				$(".gain-switch").change(g, function() {
-					that.nodeSwitch( g );
-				});
 				$(".gain-value").change( g, function() {
 					that.nodeChangeValue(g, this);
 				});
@@ -90,14 +106,12 @@ AudioNodes.prototype.attachEvents = function(nodes) {
 				$(".tunachorus-switch").change(tc, function() {
 					that.nodeSwitch( tc );
 				});
-				$(".tunachorus-rate, .tunachorus-feedback, .tunachorus-delay").change(tc, function() {
+				$(".tunachorus-delay").change(tc, function() {
 					that.nodeChangeValue(tc, this);
 				});
 				break;
 		}//switch
 	}//for
-	
-	
 };
 
 AudioNodes.prototype.nodeSwitch = function(nodeToSwitch) {
@@ -135,7 +149,7 @@ AudioNodes.prototype.nodeChangeValue = function (nodeToAdjust, element) {
 	var val = parseFloat(element.value);
 	var node = nodeToAdjust.node;
 	if (node instanceof GainNode) {
-		node.gain.value = val;
+			node.gain.value = val;
 	}
 	if (node instanceof DelayNode) {
 		node.delayTime.value = val;
@@ -155,11 +169,10 @@ AudioNodes.prototype.nodeChangeValue = function (nodeToAdjust, element) {
 				node.bypass = val;
 				break;
 			default:
-				console.error($(element).attr("name")+" is not an allowed setting name");
+				console.error($(element).attr("name")+" is not an allowed setting name for tunaChorus node");
 		}
 	}
 }
-
 ;var isChannelReady;
 var isInitiator = false;
 var isStarted = false;
