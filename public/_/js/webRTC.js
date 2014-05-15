@@ -96,7 +96,7 @@ var remoteVideo = document.querySelector('#remoteVideo');
 
 function handleUserMedia(stream) {
 	//modify audio with web audio/tuna.js nodes
-	initAudioNodes(stream);
+	var stream = initAudioNodes(stream);
 	console.log('Adding local stream.');
 	localVideo.src = window.URL.createObjectURL(stream);
 	localStream = stream;

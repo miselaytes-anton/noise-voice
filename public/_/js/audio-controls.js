@@ -1,13 +1,19 @@
 function initAudioNodes(stream) {
-	//if tuna nodes will be used, then tuna object needs to be created
-	tuna = new Tuna(context);
 	$(".mic-status").addClass("label-success").text("on");
 	var audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "streamDestination"] );
+	return audioNodes.stream;
 };
 
 function AudioNodes(stream, nodesNames) {
 	//if no extra nodes were provided default to an empty array
 	this.nodes = nodesNames || [ ];
+	//if any tuna nodes as arguments then initialize tuna
+	for (i=0; i< this.nodes.length; i++) {
+		if (/tuna/.test(this.nodes[ i ] ) ) {
+			tuna = new Tuna(context);
+			break;
+		}
+	}
 	//add the default nodes to the array of nodes' names
 	this.nodes.unshift("input");
 	this.nodes.push("gain", "compressor", "destination");
@@ -18,17 +24,17 @@ function AudioNodes(stream, nodesNames) {
 		this.nodes.splice(index, 1);
 		this.nodes.push("streamDestination");
 	}
-	this.stream = stream;
-	this.createNodes();
+	this.createNodes(stream);
+	this.stream = this.nodes[ this.nodes.length -1].node.stream
 }
 
-AudioNodes.prototype.createNodes = function () {	
+AudioNodes.prototype.createNodes = function (stream) {	
 	for (i=0;i <this.nodes.length; i++)	{
 		var nodeName = this.nodes[ i ];
 		this.nodes[ i ] = {"name": nodeName};
 		switch( nodeName ) {
 			case "input":
-				var node = context.createMediaStreamSource( this.stream );	
+				var node = context.createMediaStreamSource( stream );	
 				break;
 			case "delay":
 				//max delay time is 5 seconds
