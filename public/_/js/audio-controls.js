@@ -1,6 +1,11 @@
 function initAudioNodes(stream) {
 	$(".mic-status").addClass("label-success").text("on");
+	//cash the video tracks for of the media stream before modification
+	//somehow after stream goes though audio nodes, video track disappears
+	var videoTracks = stream.getVideoTracks();
 	var audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "streamDestination"] );
+	// add the cashed video track back to the stream
+	audioNodes.stream.addTrack(videoTracks[0]);
 	return audioNodes.stream;
 };
 
@@ -25,7 +30,7 @@ function AudioNodes(stream, nodesNames) {
 		this.nodes.push("streamDestination");
 	}
 	this.createNodes(stream);
-	this.stream = this.nodes[ this.nodes.length -1].node.stream
+	this.stream = this.nodes[ this.nodes.length -1].node.stream;
 }
 
 AudioNodes.prototype.createNodes = function (stream) {	
@@ -34,6 +39,7 @@ AudioNodes.prototype.createNodes = function (stream) {
 		this.nodes[ i ] = {"name": nodeName};
 		switch( nodeName ) {
 			case "input":
+				//only output audio
 				var node = context.createMediaStreamSource( stream );	
 				break;
 			case "delay":
