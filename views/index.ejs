@@ -1,9 +1,12 @@
 <%- include header.ejs %>
 <section class="container">
-<h1>Noise Voice</h1>
-<form action='/' method='post' class="form-inline">
-	<input type="text" placeholder ="Enter a room name" class="roomName form-control" name="roomName"  required>
-	<button class="btn btn-primary">Create/Join</button>
-</form>
+	<div class="app-intro">
+		<img class="logo" src="../img/noisevoice.png">
+		<p>Change your voice with special effects<br/> and invite your friends to talk.</p>
+		<form action='/' method='post' class="form-inline">
+			<input type="text" placeholder ="Enter a name for your talk room" class="roomName form-control input-lg" size="27" name="roomName"  required>
+			<button class="btn btn-primary btn-lg">Start</button>
+		</form>
+	</div>
 </section>
 <%- include footer.ejs %>

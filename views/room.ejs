@@ -2,20 +2,24 @@
 <section class='container-fluid'>
 	<nav class="row">
 		<ul class="nav pull-left">
-			<li> <a href="/"><span class="glyphicon glyphicon-arrow-left"></span> back</a></li>
+			<li> <a href="/"><img src="../img/noisevoice.png"></a></li>
 		</ul>
 	</nav>
 	<div class="row">
 		<section class="videos col-md-6" >
-			<video id='remoteVideo' autoplay class="thumbnail" src="none" mute></video>
-			<video id='localVideo' autoplay class="thumbnail" src="none" mute></video>
-			<p>
-				<code class="linkText ">http://<%= domain %>/<%= roomName %></code>
-				- share this link with the person you want to connect to.
-			</p>	
+			<video id='remoteVideo' autoplay  src="none" mute></video>
+			<div class="row">
+				<div class="col-xs-3">
+					<video id='localVideo' autoplay  src="none" mute></video>
+				</div>
+				<div class="col-xs-9">
+					<p><span class="room-url">http://<%= domain %>/<%= roomName %></span><br/>
+					- share this link with the person you want to connect to.</p>	
+				</div>
+				
+			</div>			
 		</section>
 		<section class="controls col-md-6">
-		<h2>Audio controls</h2>
 		<%- include audioControls.ejs %>
 		</section>
 		

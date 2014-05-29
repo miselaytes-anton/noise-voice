@@ -1,44 +1,99 @@
 @import "bootstrap/bootstrap.less";
+
+//
+//Variables
+//-------------------------------------------------------------------
+
 //colors
-@grey: #606060;
+@grey: #7a7a7a;
 @grey-darker: #313234;
 @black: #1F1F1F;
-@mint: #FBDC01;
 @beige: #F8F8F8;
-@yellow: #FBDC01;
+@purple: #4641B8;
 
+//backgrounds
+@stardust: @grey-darker url('../img/stardust.png');
+@wavecut: @grey url('../img/wavecut.png');
 
-/*
-body:after {
-  content: "";
-  background-color: @beige;
- // background: url('../img/noise.gif');
-  //opacity: 0.08;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;   
-}
-*/
+//borders
+@grey-border: 2px solid @grey;
+
+//
+//Generic Styles
+//----------------------------------------------------------------------
 body {
-	 background-color: @beige;
+	 background: @stardust;
+	 font-family: 'Dosis', sans-serif; 
+	 color: @beige;
 }
+p {
+	font-size: 1.4em;
+}
+h1, h2, h3, h4, h5 {
+	//background: @wavecut;
+	padding: 10px 15px;
+	//border: @grey-border;
+	}
+.app-intro {
+	margin-top: 10%;
+}
+.logo {
+	margin-bottom: 5%;
+}
+
+//
+//Videos
+//-----------------------------------------------------------------------
+
 #localVideo{
 	width: 25%; 
 	min-width: 160px;
+	border: @grey-border;
 }
 #remoteVideo{
 	width: 100%;
 	max-height:100%;
+	border: @grey-border;
 }
 
-.videos{position:relative;}
+.videos {
+	p {margin-top: 2%;}
+	.room-url {background-color: @purple; padding: 1%;}
+}
 
-//range input
+
+//
+//Audio Effects Panel
+//------------------------------------------------------------------------
+
+.effects-panel {
+	display:none;
+	padding: 20px;
+	-webkit-animation: myanim 2s;
+	animation: myanim 2s;
+	h1,h2,h3,h4 {border: @grey-border;}
+}
+
+//animate effects panel appearance
+@-webkit-keyframes myanim { 0% { opacity: 0.1; }100% { opacity: 1.0; } }
+@-moz-keyframes myanim { 0% { opacity: 0.1; }100% { opacity: 1.0; } }
+@-o-keyframes myanim { 0% { opacity: 0.1; }100% { opacity: 1.0; } }
+@keyframes myanim { 0% { opacity: 0.1; }100% { opacity: 1.0; } }
+.effect {
+			min-height:200px;
+			background-image: url('../img/wavecut.png');
+			color: #333;
+			border-radius: 30px;
+			text-align: center;
+			padding: 3%;
+}
+
+.btn-option {opacity: 0.8;}
+
+//Inputs
+
 input[type="range"] {
-	background: @yellow;
+	background: @purple;
 	border: none;
 	display: block;
 	height: 10px;
@@ -93,15 +148,6 @@ input[type="range"] {
 	}
 }
 
-.effect {
-			min-height:200px;
-		}
-.effects-panel {
-	display:none;
-	padding: 20px;
-	background-color: #ebebeb;
-}
-
-
+input[type="checkbox"] {float:none!important;}
 
 

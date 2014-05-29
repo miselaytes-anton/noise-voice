@@ -251,9 +251,9 @@ AudioNodes.prototype.nodeChangeValue = function (nodeToAdjust, element) {
 $(".effects-hide").click(function(){
 	$(".effects-panel").hide();
 });
-$(".option").click(function(){
+$(".btn-option").click(function(){
 	if (!$(this).hasClass("active")) {
-		$(".option").removeClass("active");
+		$(".btn-option").removeClass("active");
 		$(this).addClass("active");
 	}
 });
