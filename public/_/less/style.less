@@ -3,10 +3,12 @@
 @grey: #606060;
 @grey-darker: #313234;
 @black: #1F1F1F;
-@mint: #2AC8AD;
+@mint: #FBDC01;
 @beige: #F8F8F8;
 @yellow: #FBDC01;
 
+
+/*
 body:after {
   content: "";
   background-color: @beige;
@@ -18,6 +20,10 @@ body:after {
   right: 0;
   position: absolute;
   z-index: -1;   
+}
+*/
+body {
+	 background-color: @beige;
 }
 #localVideo{
 	width: 25%; 
@@ -35,7 +41,7 @@ input[type="range"] {
 	background: @yellow;
 	border: none;
 	display: block;
-	height: 20px;
+	height: 10px;
 	width: 100%;
 	-webkit-box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.25), inset 0px 1px 3px rgba(0, 0, 0, 0.3);
@@ -53,8 +59,8 @@ input[type="range"] {
 	border: 1px solid #ccc;
 	cursor: pointer;
 	display: inline-block;
-	width: 30px;
-	height: 30px;
+	width: 20px;
+	height: 20px;
 	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(100%, rgba(0, 0, 0, 0.1)));
 	background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
 	background-image: -moz-linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.1));
@@ -71,8 +77,8 @@ input[type="range"] {
 	&:after {
 		content: "";
 		display: block;
-		width: 15px;
-		height: 15px;
+		width: 10px;
+		height: 10px;
 		margin: auto;
 		background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.13)), color-stop(100%, rgba(255, 255, 255, 0)));
 		background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.13), rgba(255, 255, 255, 0));
@@ -85,6 +91,15 @@ input[type="range"] {
 		-o-border-radius: 20px;
 		border-radius: 20px;
 	}
+}
+
+.effect {
+			min-height:200px;
+		}
+.effects-panel {
+	display:none;
+	padding: 20px;
+	background-color: #ebebeb;
 }
 
 

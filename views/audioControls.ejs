@@ -1,5 +1,14 @@
-<div class="row-fluid">	
-	<section class="col-sm-3 panel panel-default mic">
+<div class="row">
+	<div class="btn-group btn-group-justified">
+		<a role="button" class="btn btn-default option active effects-hide" data-toggle="tab">Clear sound</a>
+		<a role="button" class="btn btn-default option effects-hide" data-toggle="tab">Option 1</a>
+		<a role="button" class="btn btn-default option effects-hide" data-toggle="tab">Option 2</a>
+		<a role="button" class="btn btn-default option effects-hide" data-toggle="tab">Option 3</a>
+		<a role="button" class="btn btn-default option effects-show" >Custom</a>
+	</div>
+</div><!--row-->
+<div class="row  effects-panel">
+	<section class="effect col-sm-4 panel panel-default mic">
 		
 		<h3>Microphone</h3>
 		<span class="mic-status label label-default">off</span>
@@ -8,7 +17,7 @@
 		</div>
 	</section><!--Mic and gain-->
 	
-	<section class="col-sm-3 panel panel-default">
+	<section class="effect col-sm-4 panel panel-default">
 		<h3>Delay</h3>
 		<div class="checkbox">
 			<label><input type="checkbox" value="" class="delay-switch" checked>on/off</label>
@@ -18,7 +27,7 @@
 		</div>
 	</section><!--Delay-->
 	
-	<section class="col-sm-3 panel panel-default">
+	<section class="effect col-sm-4 panel panel-default">
 		<h3>Chorus (tuna)</h3>
 		<div class="checkbox">
 			<label><input type="checkbox" value="" class="tunachorus-switch" checked>on/off</label>
@@ -28,46 +37,45 @@
 		</div>
 	</section><!--TunaChorus-->
 	
-	<section class="col-sm-3 panel panel-default">
-				<h3>Wah Wah (tuna)</h3>
-				<div class="checkbox">
-					<label><input type="checkbox" value="" class="tunawahwah-switch" checked>on/off</label>
-				</div>
-				<div class="range">
-					<label>baseFrequency: <input type="range"  name="baseFrequency" min="0" max="1" value="0.5"  step="0.1"  class="tunawahwah-baseFrequency"></label>
-				</div>
-				<div class="range">
-					<label>excursionOctaves: <input type="range"  name="excursionOctaves" min="1" max="6" value="2"  step="1"  class="tunawahwah-excursionOctaves"></label>
-				</div>
-				<div class="range">
-					<label>sweep: <input type="range"  name="sweep" min="0" max="1" value="0.2"  step="0.1"  class="tunawahwah-sweep"></label>
-				</div>
-				<div class="range">
-					<label>resonance: <input type="range"  name="resonance" min="10" max="100" value="10"  step="10"  class="tunawahwah-resonance"></label>
-				</div>
-				<div class="range">
-					<label>sensitivity: <input type="range"  name="sensitivity" min="0" max="1" value="0.5"  step="0.1"  class="tunawahwah-sensitivity"></label>
-				</div>
-			</section><!--Tunawahwah-->
-			
-			<section class="col-sm-3 panel panel-default">
-				<h3>Overdrive (tuna)</h3>
-				<div class="checkbox">
-					<label><input type="checkbox" value="" class="tunaoverdrive-switch" checked>on/off</label>
-				</div>
-				<div class="range">
-					<label>drive: <input type="range"  name="drive" min="0" max="1" value="0.7"  step="0.1"  class="tunaoverdrive-drive"></label>
-				</div>
-				<div class="range">
-					<label>algorithmIndex (1-5): <input type="range"  name="algorithmIndex" min="0" max="5" value="5"  step="1"  class="tunaoverdrive-algorithmIndex"></label>
-				</div>
-			</section><!--Tunaoverdrive-->
-			
-			<section class="col-sm-3 panel panel-default">
-				<h3>Tremolo (tuna)</h3>
-				<div class="checkbox">
-					<label><input type="checkbox" value="" class="tunatremolo-switch" checked>on/off</label>
-				</div>
-			</section><!--Tunatremolo-->
+	<section class="effect col-sm-4 panel panel-default">
+		<h3>Wah Wah (tuna)</h3>
+		<div class="checkbox">
+			<label><input type="checkbox" value="" class="tunawahwah-switch" checked>on/off</label>
+		</div>
+		<div class="range">
+			<label>baseFrequency: <input type="range"  name="baseFrequency" min="0" max="1" value="0.5"  step="0.1"  class="tunawahwah-baseFrequency"></label>
+		</div>
+		<div class="range">
+			<label>excursionOctaves: <input type="range"  name="excursionOctaves" min="1" max="6" value="2"  step="1"  class="tunawahwah-excursionOctaves"></label>
+		</div>
+		<div class="range">
+			<label>sweep: <input type="range"  name="sweep" min="0" max="1" value="0.2"  step="0.1"  class="tunawahwah-sweep"></label>
+		</div>
+		<div class="range">
+			<label>resonance: <input type="range"  name="resonance" min="10" max="100" value="10"  step="10"  class="tunawahwah-resonance"></label>
+		</div>
+		<div class="range">
+			<label>sensitivity: <input type="range"  name="sensitivity" min="0" max="1" value="0.5"  step="0.1"  class="tunawahwah-sensitivity"></label>
+		</div>
+	</section><!--Tunawahwah-->
 	
+	<section class="effect col-sm-4 panel panel-default">
+		<h3>Overdrive (tuna)</h3>
+		<div class="checkbox">
+			<label><input type="checkbox" value="" class="tunaoverdrive-switch" checked>on/off</label>
+		</div>
+		<div class="range">
+			<label>drive: <input type="range"  name="drive" min="0" max="1" value="0.7"  step="0.1"  class="tunaoverdrive-drive"></label>
+		</div>
+		<div class="range">
+			<label>algorithmIndex (1-5): <input type="range"  name="algorithmIndex" min="0" max="5" value="5"  step="1"  class="tunaoverdrive-algorithmIndex"></label>
+		</div>
+	</section><!--Tunaoverdrive-->
+	
+	<section class="effect col-sm-4 panel panel-default">
+		<h3>Tremolo (tuna)</h3>
+		<div class="checkbox">
+			<label><input type="checkbox" value="" class="tunatremolo-switch" checked>on/off</label>
+		</div>
+	</section><!--Tunatremolo-->
 </div><!--row-->
