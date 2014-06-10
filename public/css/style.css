@@ -5810,6 +5810,10 @@ h5 {
   background-color: #4641b8;
   padding: 1%;
 }
+.note {
+  font-size: 1em;
+  font-style: italic;
+}
 .effects-panel {
   display: none;
   padding: 20px;
