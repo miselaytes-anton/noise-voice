@@ -1,10 +1,4 @@
 <%- include header.ejs %>
-<section class='container-fluid'>
-	<nav class="row">
-		<ul class="nav pull-left">
-			<li> <a href="/"><img src="../img/noisevoice.png"></a></li>
-		</ul>
-	</nav>
 	<div class="row">
 		<section class="videos col-md-6" >
 			<video id='remoteVideo' autoplay  src="none" mute></video>
@@ -25,6 +19,5 @@
 		
 	</div>
 
-</section>
 <script type='text/javascript'> var room =typeof <%= roomName %> =="undefined"?'':'<%= roomName %>';</script>
 <%- include footer.ejs %>

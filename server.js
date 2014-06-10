@@ -15,7 +15,8 @@ app.use(bodyParser());
 //routes
 app.get('/', templates.index);
 app.post('/', templates.setRoomName);
-app.get('/:roomName', templates.room);
+app.get('/room/:roomName', templates.room);
+app.get('/about', templates.about);
 
 io.sockets.on('connection', function (socket){
 	function log(){
