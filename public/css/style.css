@@ -5787,6 +5787,26 @@ h4,
 h5 {
   padding: 10px 15px;
 }
+.site-footer {
+  background-color: #1f1f1f;
+  color: #f8f8f8;
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  opacity: 0.9;
+}
+.site-footer li {
+  display: inline-block;
+  list-style: none;
+}
+.site-footer a {
+  color: #f8f8f8;
+}
+.site-footer a:hover {
+  background-color: #4641b8;
+  text-decoration: none;
+}
 .app-intro {
   margin-top: 10%;
 }

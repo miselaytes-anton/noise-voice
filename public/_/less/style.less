@@ -34,6 +34,21 @@ h1, h2, h3, h4, h5 {
 	padding: 10px 15px;
 	//border: @grey-border;
 	}
+.site-footer{
+	background-color: @black;
+	color: @beige;
+	position: fixed;
+	bottom: 0;
+	z-index: 100;
+	width: 100%;
+	opacity: 0.9;
+	li {display: inline-block; list-style:none;}
+	a {
+		color: @beige;
+		&:hover{background-color:@purple;text-decoration:none;}
+	}
+}
+//nav li a:hover {background-color: @purple!important;}
 .app-intro {
 	margin-top: 10%;
 }
