@@ -5807,11 +5807,24 @@ h5 {
   background-color: #4641b8;
   text-decoration: none;
 }
-.app-intro {
-  margin-top: 10%;
+.lead-text {
+  font-size: 2em;
 }
 .logo {
   margin-bottom: 5%;
+}
+.block {
+  min-height: 200px;
+  background-image: url('../img/wavecut.png');
+  color: #333;
+  border-radius: 30px;
+  text-align: center;
+  padding: 3%;
+}
+.block--narrow {
+  display: block;
+  margin: 0 auto;
+  max-width: 650px;
 }
 #localVideo {
   width: 25%;
@@ -5877,14 +5890,6 @@ h5 {
   100% {
     opacity: 1.0;
   }
-}
-.effect {
-  min-height: 200px;
-  background-image: url('../img/wavecut.png');
-  color: #333;
-  border-radius: 30px;
-  text-align: center;
-  padding: 3%;
 }
 .btn-option {
   opacity: 0.8;
