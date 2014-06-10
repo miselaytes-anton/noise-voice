@@ -29,14 +29,7 @@ AudioNodes.prototype.setSettings = function( ) {
 		  },
 		  "delay": {
 			"isConnected": true,
-			"delayTime": {
-			  "units": 0,
-			  "name": "delayTime",
-			  "defaultValue": 0,
-			  "maxValue": 5,
-			  "minValue": 0,
-			  "value": 0
-			}
+			"delayTime": 0
 		  },
 		  "tunachorus": {
 			"isConnected": true,
@@ -48,11 +41,11 @@ AudioNodes.prototype.setSettings = function( ) {
 		  "tunawahwah": {
 			"isConnected": true,
 			"automode": true,  //true/false
-			"baseFrequency": 500,   //0 to 1
+			"baseFrequency": 0.5,   //0 to 1
 			"excursionOctaves": 2,    //1 to 6
 			"sweep": 1,   //0 to 1
 			"resonance": 10,    //1 to 100
-			"sensitivity": 3.1622776601683795,   //-1 to 1
+			"sensitivity": 0.5,   //-1 to 1
 			"bypass": false
 		  },
 		  "tunaoverdrive": {
@@ -81,14 +74,7 @@ AudioNodes.prototype.setSettings = function( ) {
 		  },
 		  "gain": {
 			"isConnected": true,
-			"gain": {
-			  "units": 0,
-			  "name": "gain",
-			  "defaultValue": 1,
-			  "maxValue": 1,
-			  "minValue": 0,
-			  "value": 0.5
-			}
+			"gain": 0.5
 		  },
 		  "compressor": {
 			"isConnected": true
@@ -100,8 +86,6 @@ AudioNodes.prototype.setSettings = function( ) {
 			"isConnected": true
 		  }
 	};
-	//before any changes are made customSet is set to default settings
-	this.settings.customSet	 = this.settings.defaultSet;
 	this.settings.clearSound = {
 				  "delay": { "isConnected": false},
 				  "tunachorus": { "isConnected": false},
@@ -115,6 +99,108 @@ AudioNodes.prototype.setSettings = function( ) {
 						}
 				  }
 				};
+	this.settings.underWater = {
+				"delay": {
+					"isConnected": true,
+					"delayTime": {
+					  "value": 0.5
+					}
+				},
+				"tunachorus": {
+					"isConnected": true,
+					"feedback": 0.85
+				},
+				"tunawahwah": {
+					"isConnected": true,
+					"baseFrequency": 0,
+					"excursionOctaves": 1,
+					"resonance": 100,
+					"sensitivity": 0.5
+				},
+				"tunaoverdrive": {
+					"isConnected": false
+				},
+				"tunatremolo": {
+					"isConnected": false
+				},
+				"gain": {
+					"isConnected": true,
+					"gain": {
+					  "value": 0.5
+					}
+				}
+	};
+	this.settings.spaceSignal = {
+		  "delay": {
+			"isConnected": true,
+			"delayTime": {
+			  "value": 0
+			}
+		  },
+		  "tunachorus": {
+			"isConnected": true,
+			"feedback": 0.85,
+			"delay": 0.004
+		  },
+		  "tunawahwah": {
+			"isConnected": true,
+			"baseFrequency": 0.8,
+			"excursionOctaves": 3,
+			"resonance": 10,
+			"sensitivity": 0.8
+		  },
+		  "tunaoverdrive": {
+			"isConnected": false
+			},
+		  "tunatremolo": {
+			"isConnected": false
+		  },
+		  "gain": {
+			"isConnected": true,
+			"gain": {
+			  "value": 0.5
+			}
+		  }
+	};
+	this.settings.brokenRadio = {
+		"delay": {
+			"isConnected": false
+		},
+		"tunachorus": {
+			"isConnected": false
+		},
+		"tunawahwah": {
+			"isConnected": false
+		},
+		"tunaoverdrive": {
+			"isConnected": true,
+			"drive": 0.7,
+			"algorithmIndex": 1,
+		},
+		"tunatremolo": {
+			"isConnected": true,
+			"intensity": 0.2,
+			"rate": 8,
+			"stereoPhase": 8,
+			"bypass": false
+		},
+		"gain": {
+			"isConnected": true,
+			"gain": {
+			  "value": 0.5
+			}
+		},
+		"compressor": {
+			"isConnected": true
+		},
+		"destination": {
+			"isConnected": true
+		},
+		"streamDestination": {
+			"isConnected": true
+		}
+	};
+	//create an object with properties names for each node
 	this.properties={};
 	for (var prop in this.settings.defaultSet)	{
 		if (this.settings.defaultSet.hasOwnProperty(prop)){
@@ -221,63 +307,96 @@ AudioNodes.prototype.createNodes = function (stream, nodesNames, settings) {
 AudioNodes.prototype.attachEvents = function(nodes) {
 	var that=this;
 	for (var  i=0; i<nodes.length; i++  ) {
+		var nodeProperties = this.properties[nodes[ i ].name]
+		//generate the selectors based on the properties object for this node
+		var switchSelector = "."+ nodes[ i ].name +"-switch";
+		var inputValuesSelector = "";
+		for (var prop in nodeProperties){
+			// exclude isConnected property form selectors
+			if ( nodeProperties.hasOwnProperty(prop) && nodeProperties[prop]!="isConnected" ) {
+				inputValuesSelector += "." + nodes[ i ].name + "-" + nodeProperties[prop] +", ";
+			}
+		}
+		//trim the last coma and space( ,) away
+		inputValuesSelector=inputValuesSelector.substring(0, inputValuesSelector.length - 2);
+		
 		switch ( nodes[ i ].name ){
 			case "delay":
 				var d = nodes[ i ];
-				$(".delay-switch").change(d, function( ) {
+				$(switchSelector).change(d, function( ) {
 					that.nodeSwitch( d );
 				});
-				$(".delay-value").change(d, function() {
+				$(inputValuesSelector).change(d, function() {
 					that.nodeChangeValue(d , this);
 				});
 				break;
 			case "gain":
 				var g = nodes[ i ];
-				$(".gain-value").change( g, function() {
+				$(inputValuesSelector).change( g, function() {
 					that.nodeChangeValue(g, this);
 				});
 				break;
 			case "tunachorus":
 				var tc = nodes[ i ];
-				$(".tunachorus-switch").change(tc, function() {
+				$(switchSelector).change(tc, function() {
 					that.nodeSwitch( tc );
 				});
-				$(".tunachorus-delay").change(tc, function() {
+				$(inputValuesSelector).change(tc, function() {
 					that.nodeChangeValue(tc, this);
 				});
 				break;
 			case "tunawahwah":
 				var tww = nodes[ i ];
-				$(".tunawahwah-switch").change(tww, function() {
+				$(switchSelector).change(tww, function() {
 					that.nodeSwitch( tww );
 				});
-				$(".tunawahwah-baseFrequency, .tunawahwah-excursionOctaves, .tunawahwah-sweep, .tunawahwah-resonance, .tunawahwah-sensitivity, .tunawahwah-bypass").change(tww, function() {
+				$(inputValuesSelector).change(tww, function() {
 					that.nodeChangeValue(tww, this);
 				});
 				break;
 			case "tunaoverdrive":
 				var to = nodes[ i ];
-				$(".tunaoverdrive-switch").change(to, function() {
+				$(switchSelector).change(to, function() {
 					that.nodeSwitch( to );
 				});
-				$(".tunaoverdrive-drive, .tunaoverdrive-algorithmIndex").change(to, function() {
+				$(inputValuesSelector).change(to, function() {
 					that.nodeChangeValue(to, this);
 				});
 				break;
 			case "tunaphaser":
 				var tp = nodes[ i ];
-				$(".tunaphaser-switch").change(tp, function() {
+				$(switchSelector).change(tp, function() {
 					that.nodeSwitch( tp );
 				});
 				break;
 			case "tunatremolo":
 				var tt = nodes[ i ];
-				$(".tunatremolo-switch").change(tt, function() {
+				$(switchSelector).change(tt, function() {
 					that.nodeSwitch( tt );
 				});
 				break;
 			
 		}//switch
+	}//for
+};
+
+//this function resets the inputs' values in the front-end
+AudioNodes.prototype.resetInputs = function( ) {
+	var settings= this.settings.defaultSet;
+	for (var prop in settings){
+		if(settings.hasOwnProperty(prop)){
+			var nodeSettings = settings[prop];
+			var switchSelector = "."+prop+"-switch";
+			if (document.querySelector(switchSelector)!=null)	{
+				document.querySelector(switchSelector).checked=nodeSettings.isConnected;
+			}
+			for (var attr in nodeSettings){
+				var inputValueSelector =  "." + prop + "-" +attr;
+				if(nodeSettings.hasOwnProperty(attr) && document.querySelector(inputValueSelector) !=null){
+						document.querySelector(inputValueSelector).value=nodeSettings[ attr ];
+				}
+			}//for attr
+		}//if
 	}//for
 };
 
@@ -369,30 +488,22 @@ AudioNodes.prototype.saveCustomSet = function () {
 
 //this function sets the right audio nodes settings depending on which option is provided as an argument
 AudioNodes.prototype.selectOption = function (optionName) {
-	// if current option is "custom", save custom settings before making any changes
-	if ( this.settings["customIsSelected"]==true ) { 
-		this.saveCustomSet();
-	}
 	switch ( optionName ){
 		case "clear":
-			this.settings["customIsSelected"]=false;//prevent saving clear sound, option[1-3] as custom settings
 			this.loadSet (this.settings.clearSound);
 			break;
 		case "option1":
-			this.settings["customIsSelected"]=false;
-			this.loadSet("option1 settings");
+			this.loadSet (this.settings.underWater);
 			break;
 		case "option2":
-			this.settings["customIsSelected"]=false;
-			this.loadSet ("option2 settings");
+			this.loadSet (this.settings.spaceSignal);
 			break;
 		case "option3":
-			this.settings["customIsSelected"]=false;
-			this.loadSet ("option3 settings");
+			this.loadSet (this.settings.brokenRadio);
 			break;
 		case "custom":
-			this.settings["customIsSelected"]=true;
-			this.loadSet (this.settings.customSet);
+			this.resetInputs();
+			this.loadSet (this.settings.defaultSet);
 			break;
 		default:
 			console.error("unknown option's name");
@@ -410,7 +521,6 @@ AudioNodes.prototype.loadSet = function ( settings ) {
 		var settingsNode = settings[nodeName];	//audio node in the settings' object
 		//if there were no new settings provided for the current node than jump to the next node
 		if (typeof settingsNode =="undefined") { continue;}
-		
 		//if settings require connection, but the actual node is not connected
 		if (settingsNode.isConnected != node.node.isConnected && typeof settingsNode.isConnected!="undefined") {
 			this.nodeSwitch(node);
