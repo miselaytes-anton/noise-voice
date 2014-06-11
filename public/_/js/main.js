@@ -6,7 +6,6 @@ $(document).ready(function(){
 		$(".effects-panel").hide();
 	});
 
-
 	$(".option-clear").click(function(){
 		if (!$(this).hasClass("active")) {
 			$(".btn-option").removeClass("active");
@@ -42,4 +41,5 @@ $(document).ready(function(){
 			audioNodes.selectOption("option3");
 		}
 	});
+	
 });

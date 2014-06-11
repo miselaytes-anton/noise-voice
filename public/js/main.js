@@ -552,7 +552,6 @@ AudioNodes.prototype.loadSet = function ( settings ) {
 		$(".effects-panel").hide();
 	});
 
-
 	$(".option-clear").click(function(){
 		if (!$(this).hasClass("active")) {
 			$(".btn-option").removeClass("active");
@@ -588,6 +587,7 @@ AudioNodes.prototype.loadSet = function ( settings ) {
 			audioNodes.selectOption("option3");
 		}
 	});
+	
 });
 ;var isChannelReady;
 var isInitiator = false;
