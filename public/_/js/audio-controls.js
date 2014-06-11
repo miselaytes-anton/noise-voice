@@ -1,3 +1,5 @@
+context = new (window.AudioContext || window.webkitAudioContext)();
+
 function initAudioNodes(stream, includeVideo) {
 	audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "tunawahwah", "tunaoverdrive",  "tunatremolo", "streamDestination"] );
 	//start with a clear sound to avoid scared users
