@@ -6,7 +6,6 @@ $(document).ready(function(){
 		$(".effects-panel").hide();
 	});
 
-
 	$(".option-clear").click(function(){
 		if (!$(this).hasClass("active")) {
 			$(".btn-option").removeClass("active");
@@ -42,4 +41,11 @@ $(document).ready(function(){
 			audioNodes.selectOption("option3");
 		}
 	});
+	//animate waved background
+	var currentPosition = 0;
+	function animatebg() {
+		$('.block').css("background-position", currentPosition+"px 0px");
+		currentPosition = currentPosition+5;
+	} 
+	window.setInterval(animatebg, 40);
 });
