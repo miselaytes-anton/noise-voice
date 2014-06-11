@@ -33,7 +33,7 @@ h1, h2, h3, h4, h5 {
 	//background: @wavecut;
 	padding: 10px 0px;
 	//border: @grey-border;
-	}
+}
 .site-footer{
 	background-color: @black;
 	color: @beige;
@@ -52,9 +52,7 @@ h1, h2, h3, h4, h5 {
 .lead-text {
 	font-size: 2em;
 }
-.logo {
-	margin-bottom: 5%;
-}
+
 .block {
 	min-height:200px;
 	background-image: url('../img/wavecut.png');
@@ -62,6 +60,9 @@ h1, h2, h3, h4, h5 {
 	border-radius: 30px;
 	text-align: center;
 	padding: 3%;
+	a {
+		color: @purple;
+	}
 }
 
 .block--narrow {
@@ -93,7 +94,11 @@ h1, h2, h3, h4, h5 {
 //
 //Homepage
 //------------------------------------------------------------------------
-.note {font-size:1em; font-style: italic;}
+.input--roomName {
+	display: inline-block; 
+	width: auto; 
+	vertical-align:middle;
+}
 //
 //Audio Effects Panel
 //------------------------------------------------------------------------

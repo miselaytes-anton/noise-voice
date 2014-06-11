@@ -1,11 +1,15 @@
 <%- include header.ejs %>
 	<div class="block block--narrow">
 		<h2>About</h2>
-		<p>This is an experimental app built with node.js, express.js, sockets.io, WebRTC, Web Audio Api, and tuna.js library </p>
+		<p>This is an experimental app built with node.js, express.js, sockets.io, WebRTC, Web Audio Api, and tuna.js library. It allows you to modify your voice with special effects and invite someone to have a video chat directly in your browser. So far it only works in Google Chrome browser. </p>
+		<form action='/' method='post' >
+			<input type="text" placeholder ="Enter a name for your talk room" class="form-control input-lg input--roomName" size="27" name="roomName"  required >
+			<button class="btn btn-primary btn-lg">Start</button>
+		</form>
 		<h2>Code</h2>
-		<p>GitHub</p>
+		<p><a href="#">GitHub</a></p>
 		<h2>Contact</h2>
 		<p>a.miselaytes@gmail.com</p>
-		<p>amiselaytes.com</p>
+		<p><a href="#">amiselaytes.com</a></p>
 	</div>
 <%- include footer.ejs %>

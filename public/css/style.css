@@ -5810,9 +5810,6 @@ h5 {
 .lead-text {
   font-size: 2em;
 }
-.logo {
-  margin-bottom: 5%;
-}
 .block {
   min-height: 200px;
   background-image: url('../img/wavecut.png');
@@ -5820,6 +5817,9 @@ h5 {
   border-radius: 30px;
   text-align: center;
   padding: 3%;
+}
+.block a {
+  color: #4641b8;
 }
 .block--narrow {
   display: block;
@@ -5843,9 +5843,10 @@ h5 {
   background-color: #4641b8;
   padding: 1%;
 }
-.note {
-  font-size: 1em;
-  font-style: italic;
+.input--roomName {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
 }
 .effects-panel {
   display: none;
