@@ -587,9 +587,8 @@ AudioNodes.prototype.loadSet = function ( settings ) {
 			audioNodes.selectOption("option3");
 		}
 	});
-	
-});
-;var isChannelReady;
+
+});;var isChannelReady;
 var isInitiator = false;
 var isStarted = false;
 var localStream;
