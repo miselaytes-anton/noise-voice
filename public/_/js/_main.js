@@ -1,3 +1,9 @@
+appSupported = true;
+if ( !window.webkitAudioContext && !navigator.webkitGetUserMedia) {
+	appSupported = false;
+	$(".modal").modal();
+}
+
 $(document).ready(function(){
 	$(".effects-show").click(function(){
 			$(".effects-panel").show();

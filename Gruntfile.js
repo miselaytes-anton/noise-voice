@@ -17,7 +17,8 @@ module.exports = function(grunt) {
 					"public/_/js/lib/adapter.js",
 					"public/_/js/lib/tuna.js",
 					"public/_/js/lib/bootstrap/tooltip.js",
-					"public/_/js/lib/bootstrap/popover.js"
+					"public/_/js/lib/bootstrap/popover.js",
+					"public/_/js/lib/bootstrap/modal.js"
 				],
 			dest: "public/js/lib.js"
 		}

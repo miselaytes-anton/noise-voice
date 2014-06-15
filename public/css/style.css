@@ -3449,12 +3449,11 @@ h5 {
   padding: 10px 0px;
 }
 .site-footer {
-  background-color: #1f1f1f;
+  background-color: #4641b8;
   color: #f8f8f8;
   position: fixed;
   bottom: 0;
   z-index: 100;
-  width: 100%;
   opacity: 0.9;
 }
 .site-footer li {
@@ -3463,9 +3462,11 @@ h5 {
 }
 .site-footer a {
   color: #f8f8f8;
+  cursor: pointer;
 }
 .lead-text {
   font-size: 2em;
+  color: #1f1f1f;
 }
 .block {
   min-height: 200px;

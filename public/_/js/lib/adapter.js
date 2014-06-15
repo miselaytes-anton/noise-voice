@@ -77,6 +77,7 @@ if (navigator.mozGetUserMedia) {
   };
 } else if (navigator.webkitGetUserMedia) {
   console.log("This appears to be Chrome");
+  
 
   webrtcDetectedBrowser = "chrome";
   webrtcDetectedVersion =
@@ -150,5 +151,6 @@ if (navigator.mozGetUserMedia) {
     };
   }
 } else {
+	
   console.log("Browser does not appear to be WebRTC-capable");
 }
