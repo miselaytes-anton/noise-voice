@@ -12,10 +12,12 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
 
+
 //routes
 app.get('/', templates.index);
 app.post('/', templates.setRoomName);
 app.get('/room/:roomName', templates.room);
+app.get('*', templates.notFound);
 
 io.sockets.on('connection', function (socket){
 	function log(){
