@@ -16,8 +16,6 @@ app.use(bodyParser());
 app.get('/', templates.index);
 app.post('/', templates.setRoomName);
 app.get('/room/:roomName', templates.room);
-app.get('/about', templates.about);
-app.post('/about', templates.setRoomName);
 
 io.sockets.on('connection', function (socket){
 	function log(){

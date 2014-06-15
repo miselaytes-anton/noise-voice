@@ -12,7 +12,3 @@ exports.setRoomName = function(req, res, next){
     var roomName = req.body.roomName;
 	res.redirect('/room/'+roomName);
 };
-
-exports.about = function(req, res, next){
-    res.render('about');
-};

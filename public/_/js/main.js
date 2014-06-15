@@ -50,6 +50,25 @@ $(document).ready(function(){
 		currentPosition = currentPosition+5;
 	} 
 	//initalize bootsrap popover
-	$(".about-popover").popover();
+	var popoverContent = 
+		"<button type='button' class='close' aria-hidden='true'>&times;</button>"+
+		"<h3>About</h3>" +
+		"<p>This is an experimental app built with node.js, express.js, sockets.io, WebRTC, Web Audio Api, and tuna.js library. </p>"+
+		"<p>It allows you to modify your voice with special effects and invite someone to have a video chat directly in your browser. So far it only works in Google Chrome. </p>"+
+		"<p><a href='#'>GitHub</a></p>"+
+		"<h3>Contact</h3>"+
+		"<p><a href='#'>amiselaytes.com</a>, a.miselaytes@gmail.com</p>";
+	
+	$(".about-popover").popover({
+		"content":popoverContent,
+		"html":true,
+		"placement":"top"
+	});
+	$(".about-popover").click(function(){
+		$(".close").click (function(){
+			$(".about-popover").popover("hide");
+			console.log("close");
+		});
+	});
 
 });
