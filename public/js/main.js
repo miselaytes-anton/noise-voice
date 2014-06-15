@@ -128,7 +128,7 @@ AudioNodes.prototype.setSettings = function( ) {
 				"gain": {
 					"isConnected": true,
 					"gain": {
-					  "value": 0.5
+					  "value": 0.9
 					}
 				}
 	};
@@ -189,7 +189,7 @@ AudioNodes.prototype.setSettings = function( ) {
 		"gain": {
 			"isConnected": true,
 			"gain": {
-			  "value": 0.5
+			  "value": 0.3
 			}
 		},
 		"compressor": {
