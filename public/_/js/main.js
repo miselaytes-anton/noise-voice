@@ -41,5 +41,15 @@ $(document).ready(function(){
 			audioNodes.selectOption("option3");
 		}
 	});
+	//animate waved bg
+	var block = $(".block--animate");
+	var currentPosition = 0;
+	if (typeof block !="null") { window.setInterval(animatebg, 40); }
+	function animatebg() {
+		block.css("background-position", currentPosition+"px 0px");
+		currentPosition = currentPosition+5;
+	} 
+	//initalize bootsrap popover
+	$(".about-popover").popover();
 
 });

@@ -7,22 +7,35 @@ module.exports = function(grunt) {
 		options: {
 		  separator: ';',
 		},
-		dist: {
+		my: {
 		  src: [ "public/_/js/*.js" ],
 		  dest: "public/js/main.js"
+		},
+		lib: {
+			src: [ 
+					"public/_/js/lib/jquery.js",
+					"public/_/js/lib/adapter.js",
+					"public/_/js/lib/tuna.js",
+					"public/_/js/lib/bootstrap/tooltip.js",
+					"public/_/js/lib/bootstrap/popover.js"
+				],
+			dest: "public/js/lib.js"
 		}
 	},
+
 	uglify: {
-		production: {
-		  files: [
-                {
-                    src: ["public/js/main.js"],
-                    dest: ["public/js/main.min.js"]
-                }
-			]
-		  
+		my: {
+		  files: {
+			'public/js/main.min.js': ['public/js/main.js']
+		  }
+		},
+		lib: {
+		  files: {
+			'public/js/lib.min.js': ['public/js/lib.js']
+		  }
 		}
-	  },
+	},
+	
 	less: {
 		development: {
 			files: {
@@ -37,7 +50,7 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: [ 'public/_/js/*.js' ],
-				tasks: ['concat']
+				tasks: ['concat:my']
 			}
 	}
   });

@@ -1,24 +1,12 @@
 </section>
 <footer class="site-footer ">
 	<section class="container-fluid">
-			<a href="/about"> about</a><span class="note pull-right">*Works in Google Chrome browser only </span>
+			<a href="#" class="about-popover"> about</a><span class="note pull-right">*Works in Google Chrome browser only </span>
 	</section>
 </footer>
-<%
-//load scripts if not homepage
-if (typeof path !='undefined') {
-%>
-	<script src="/js/lib/jquery-2.1.1.min.js"></script>
-	<script src="/js/lib/tuna.js"></script>
-	<script src="/js/lib/adapter.js"></script>
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="/js/main.js"></script>
-<%
-} else {
-%>
-	<script src="/js/animatebg.js"></script>
-<%
-}
-%>
+<script src="/js/lib.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/main.js"></script>
+
 </body>
 </html>
