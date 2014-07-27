@@ -15,6 +15,7 @@ module.exports = function(grunt) {
 			src: [ 
 					"public/_/js/lib/jquery.js",
 					"public/_/js/lib/adapter.js",
+					"public/_/js/lib/shared.js",
 					"public/_/js/lib/tuna.js",
 					"public/_/js/lib/bootstrap/tooltip.js",
 					"public/_/js/lib/bootstrap/popover.js",
