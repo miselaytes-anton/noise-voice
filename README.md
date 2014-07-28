@@ -12,7 +12,7 @@ The voice is modified using [Web Audio Api](https://developer.mozilla.org/en-US/
 
 To make modifying of the voice somewhat easier I used a [tuna.js audio effects library](https://github.com/Dinahmoe/tuna), which is great and very easy to use with the only downside that it does not support Firefox. But anyway building these audio effects from scratch would be a nighmare.
 
-To be able to connect/disconnect and adjust properties of Audio Nodes I wrote a small [audio-controls.js library](https://github.com/miselaytes-anton/noise-voice/blob/master/public/_/js/audio-controls.js), which works with native audio nodes and alos with tuna.js audio effects nodes.
+To be able to connect/disconnect and adjust properties of Audio Nodes I wrote a small [audio-controls.js library](https://github.com/miselaytes-anton/noise-voice/blob/master/public/_/js/audio-controls.js), which works with native audio nodes and also with tuna.js audio effects nodes.
 
 The video and audio are that exchanged between users using WebRTC. Node.js is used as a signalling server. The biggest part of the WebRTC and socket.io set up is based on [this great tutorial](https://bitbucket.org/webrtc/codelab).
 
@@ -22,8 +22,7 @@ I also used express.js for the basic app set up.
 
 ##How to use audio-controls.js library
 
-1. Create audio context and add fallbacks for outdated Web Audio syntax
-
+1.Create audio context and add fallbacks for outdated Web Audio syntax
 ```javascript
 //defining audio context
 context = new (window.AudioContext || window.webkitAudioContext)();
@@ -45,11 +44,11 @@ if (!context.createScriptProcessor)	{
 }
 if (!context.createJavaScriptNode)	{
   context.createJavaScriptNode= context.createScriptProcessor;
-}`
+}
+```
+2.Load tuna.js library before audio-controls.js
 
-2. Load tuna.js library before audio-controls.js
-
-3. Load audio-controls.js and intializa it:
+3.Load audio-controls.js and initializing it:
 ```javascript
 //specify which nodes you want to use in the square brackets
 audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "tunawahwah", "tunaoverdrive",  "tunatremolo", "streamDestination"] );
@@ -57,7 +56,7 @@ audioNodes = new AudioNodes ( stream, [ "delay", "tunachorus", "tunawahwah", "tu
 
 ###Methods
 Turn an audio node on or off
-`AudioNodes.prototype.nodeSwitch(audioNodeObject)`
+`AudioNodes.prototype.nodeSwitch(audioNodeObject);`
 
 
 
