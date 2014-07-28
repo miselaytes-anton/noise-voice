@@ -61,7 +61,7 @@ $(document).ready(function(){
 		"<h3>About</h3>" +
 		"<p>This is an experimental app built with node.js, express.js, sockets.io, WebRTC, Web Audio Api, and tuna.js library. </p>"+
 		"<p>It allows you to modify your voice with special effects and invite someone to have a video chat directly in your browser. So far it only works in Google Chrome. </p>"+
-		"<p><a href=https://github.com/miselaytes-anton'>GitHub</a></p>"+
+		"<p><a href='https://github.com/miselaytes-anton/noise-voice'>GitHub</a></p>"+
 		"<h3>Contact</h3>"+
 		"<p><a href='http://amiselaytes.com'>amiselaytes.com</a>, a.miselaytes@gmail.com</p>";
 	
